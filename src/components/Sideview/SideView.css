@@ -1,0 +1,102 @@
+.side-view {
+  width: 350px;
+  flex-shrink: 0; /* Prevents the side view from shrinking */
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: -3px 0px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: margin-right 0.4s ease-in-out;
+  position: relative;
+}
+
+#toggle-button {
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease-in-out, left 0.4s ease-in-out,
+    opacity 0.4s ease-in-out;
+}
+
+.side-view.hidden {
+  /* (width + padding-left + padding-right) = 350 + 20 + 20 = 390 */
+  margin-right: -390px;
+}
+
+.side-view.hidden #toggle-button {
+  /* Move button back into view and make it transparent */
+  transform: translateY(-50%) rotate(180deg);
+  left: -45px;
+  opacity: 0.7;
+}
+
+.side-view-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.side-section {
+  padding-bottom: 15px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  background-color: #fafafa;
+}
+
+.section-header .title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.drawer-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 5px;
+  line-height: 1;
+  color: #555;
+  transition: transform 0.3s ease-in-out;
+}
+
+.drawer-content {
+  max-height: 500px; /* Set a large max-height for the animation */
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+  padding: 10px 5px 0 5px;
+}
+
+.drawer-content.hidden {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.drawer-content.hidden + .section-header .drawer-toggle-btn,
+.section-header.collapsed .drawer-toggle-btn {
+  transform: rotate(-45deg);
+}
+
+.sample-item {
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+}
