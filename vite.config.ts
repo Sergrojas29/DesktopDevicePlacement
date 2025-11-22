@@ -15,6 +15,15 @@ export default defineConfig(async () => ({
   // 2. tauri expects a fixed port, fail if that port is not available
   server: {
     port: 1420,
+    open: true,
+    proxy:{
+      '/api':{
+        target:'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''), // Remove /api prefix for the backend
+      },
+    },
     strictPort: true,
     host: host || false,
     hmr: host
