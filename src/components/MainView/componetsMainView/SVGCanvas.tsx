@@ -38,7 +38,6 @@ export default function SVGCanvas() {
                     return (<circle onClick={() => console.log(Device.X_COORDINATE, Device.Y_COORDINATE)} key={key} cx={Device.X_COORDINATE} cy={Device.Y_COORDINATE} r="10" fill="red" />)
                 }
             })}
-
         </svg>
     )
 }

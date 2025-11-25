@@ -1,6 +1,7 @@
 
 import { create } from 'zustand';
 import { ChangeEvent } from 'react';
+import axios from 'axios';
 
 
 export type DeviceMap = Map<string, Device>;
@@ -38,6 +39,7 @@ interface DeviceState {
     parseData: (fileContent: string) => void;
     setGroupAndNumber_NAC_ONLY_FOR_NOW(Dev: Device): Device;
     compare(device: Device, viewport: Viewport): void;
+    sendDataForTree: () => Promise<void>;
 }
 
 const useDeviceStore = create<DeviceState>((set, get) => ({
@@ -199,6 +201,33 @@ const useDeviceStore = create<DeviceState>((set, get) => ({
         //!ADD SPEAKER AND IDNET LATER
         return device;
 
+    },
+
+
+    sendDataForTree: async () => {
+        try {
+            type Point = number[]; 
+
+            interface Data{
+                HANDLE: string
+                Point: Point
+            }
+            
+
+            let data: Data[]= []
+
+
+
+            get().deviceMap.forEach((device)=>{
+                data.push({HANDLE: device.HANDLE,Point: [device.X_COORDINATE,device.Y_COORDINATE]});
+            })
+            
+            console.log(JSON.stringify(data));
+            
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 }))
